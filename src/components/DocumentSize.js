@@ -22,7 +22,7 @@ const DocumentSize = (props) => {
 
   const data = {
     datasets: [{
-      label: 'Requests pro Minute',
+      label: 'Antwortcode 200 und Antwortgrösse < 1000',
       duration: 0,
       fill: false,
       lineTension: 0.1,
