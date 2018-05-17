@@ -1,0 +1,48 @@
+*, :after, :before {
+  box-sizing: border-box;
+  outline: none;
+}
+html {
+  font-size: 10px;
+}
+body {
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: $s-size;
+  line-height: 1.2;
+  font-weight: 400;
+  text-align: center;
+  padding: 0 $s-size;
+}
+button, input, optgroup, select, textarea, td, th {
+  line-height: 1;
+}
+h1 {
+  font-size: $m-size;
+  margin: $s-size;
+  color: $blue;
+}
+h2 {
+  font-size: $s-size;
+}
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 $m-size;
+}
+
+@media (min-width: $tablet) {
+  .container {
+    width: 60rem;
+  }
+  body {
+    line-height: 1.5;
+    padding: 0 $xl-size;
+  }
+  h1 {
+    font-size: $l-size;
+    margin: $xl-size;
+  }
+  h2 {
+    font-size: $m-size;
+  }
+}

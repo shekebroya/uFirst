@@ -1,0 +1,39 @@
+{
+  "name": "ufirst",
+  "version": "1.0.0",
+  "author": "Shekeb Roya",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "serve": "live-server public/",
+    "build": "webpack",
+    "dev-server": "webpack-dev-server"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-cli": "6.24.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "1.5.2",
+    "babel-preset-react": "6.24.1",
+    "chart.js": "^2.7.2",
+    "css-loader": "^0.28.11",
+    "live-server": "^1.2.0",
+    "node-sass": "^4.9.0",
+    "normalize.css": "^8.0.0",
+    "react": "^16.3.2",
+    "react-chartjs-2": "^2.7.2",
+    "react-dom": "^16.3.2",
+    "react-modal": "^3.4.4",
+    "react-transition-group": "^2.3.1",
+    "sass-loader": "^7.0.1",
+    "style-loader": "^0.21.0",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-runtime": "^6.26.0",
+    "webpack": "^4.8.1",
+    "webpack-cli": "^2.1.3"
+  }
+}

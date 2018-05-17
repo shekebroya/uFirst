@@ -1,0 +1,38 @@
+.button {
+  font-size: $s-size;
+  padding: $xs-size $s-size;
+  margin: $s-size 0;
+  border: 0.1rem solid $blue;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  width: 100%;
+  @include transition(background-color 0.2s ease-in, color 0.2s ease-in);
+}
+.button--blue {
+  color: white;
+  background-color: $blue;
+}
+.button[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.button--blue:hover,
+.button--blue:focus,
+.button--blue:active {
+  background-color: white;
+  color: $blue;
+}
+.button--blue[disabled]:hover,
+.button--blue[disabled]:focus,
+.button--blue[disabled]:active {
+  background-color: $blue;
+  color: white;
+}
+
+
+@media (min-width: $tablet) {
+  .button {
+    width: auto;
+    margin: $xl-size 0;
+  }
+}
