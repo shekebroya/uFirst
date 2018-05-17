@@ -13,8 +13,9 @@ const ResponseCodes = (props) => {
   },{});
 
   const dataValue = Object.entries(responseCodes).map(([key, value]) => {
+    const num = Math.floor(Math.random() * 255);
     const randomRgba = (
-      `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.6)`
+      `rgba(${num}, ${num}, ${num}, 0.6)`
     );
     randomColor.push(randomRgba);
     dataKey.push(key);
@@ -33,7 +34,12 @@ const ResponseCodes = (props) => {
     <div className="block container">
       <h2>Antwortcodes</h2>
         <Pie data={data} width={100} height={80}/>
-        <button disabled={props.document} onClick={props.handleShowDocument} className="button button--blue">Antwortgrösse anzeigen</button>
+        <button
+          disabled={props.document}
+          onClick={props.handleShowDocument}
+          className="button button--blue">
+          Antwortgrösse anzeigen
+        </button>
     </div>
   )
 }

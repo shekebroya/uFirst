@@ -12,8 +12,9 @@ const Requests = (props) => {
 
   const randomColor = [];
   const dataValue = Object.entries(datetime).map(([key, value], i) => {
+    const num = Math.floor(Math.random() * 255);
     const randomRgba = (
-      `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.4)`
+      `rgba(${num}, ${num}, ${num}, 0.4)`
     );
     const radius = Math.floor(Math.random() * 4 + 2);
     randomColor.push(randomRgba);
@@ -48,7 +49,12 @@ const Requests = (props) => {
     <div className="block">
       <h2>Requests pro Minute</h2>
       <Bubble data={data} />
-      <button disabled={props.response} onClick={props.handleShowResponse} className="button button--blue">Antwortcodes anzeigen</button>
+      <button
+        disabled={props.response}
+        onClick={props.handleShowResponse}
+        className="button button--blue">
+        Antwortcodes anzeigen
+      </button>
     </div>
   )
 }

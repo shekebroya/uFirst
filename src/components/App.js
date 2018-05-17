@@ -38,7 +38,7 @@ class App extends Component {
         "response_code": undefined, "document_size": undefined
       };
 
-      let host = formatedString.match(/^.*(?=\.)\.\w{2,}\.\w{1,}/gm);
+      const host = formatedString.match(/^.*(?=\.)\.\w{2,}\.\w{1,}/gm);
       if(!!host) {
         objToJson.host = host[0];
       }
@@ -54,7 +54,7 @@ class App extends Component {
         });
       }
 
-      let request = formatedString.match(/\'(.*?)\'/gm);
+      const request = formatedString.match(/\'(.*?)\'/gm);
       if(!!request) {
         let method = formatedString.match(/ \'\w{3,}/gm);
         if(!!method) {
@@ -129,15 +129,21 @@ class App extends Component {
           <Requests
             json={this.state.json}
             response={this.state.response}
-            handleShowResponse={this.handleShowResponse} />
+            handleShowResponse={this.handleShowResponse}
+          />
         }
         {this.state.response &&
           <ResponseCodes
-          json={this.state.json}
-          document={this.state.document}
-          handleShowDocument={this.handleShowDocument} />
+            json={this.state.json}
+            document={this.state.document}
+            handleShowDocument={this.handleShowDocument}
+          />
         }
-        {this.state.document && <DocumentSize json={this.state.json} />}
+        {this.state.document &&
+          <DocumentSize
+            json={this.state.json}
+          />
+        }
 
       </div>
     )
