@@ -13,9 +13,9 @@ const Methods = (props) => {
   },{});
 
   const dataValue = Object.entries(responseCodes).map(([label, value]) => {
-    const num = Math.floor(Math.random() * 255);
+    const num = () => Math.floor(Math.random() * 255);
     const randomRgba = (
-      `rgba(${num}, ${num}, ${num}, 0.6)`
+      `rgba(${num()}, ${num()}, ${num()}, 0.6)`
     );
     randomColor.push(randomRgba);
     dataLabel.push(label);
@@ -33,13 +33,13 @@ const Methods = (props) => {
   return (
     <div className="block container">
       <h2>HTTP Methoden</h2>
-        <Doughnut data={data} width={100} height={80} />
-        <button
-          disabled={props.request}
-          onClick={props.handleShowRequest}
-          className="button button--blue">
-          Requests anzeigen
-        </button>
+      <Doughnut data={data} width={100} height={80} />
+      <button
+        disabled={props.request}
+        onClick={props.handleShowRequest}
+        className="button button--blue">
+        Requests anzeigen
+      </button>
     </div>
   )
 }

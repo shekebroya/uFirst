@@ -13,9 +13,9 @@ const ResponseCodes = (props) => {
   },{});
 
   const dataValue = Object.entries(responseCodes).map(([key, value]) => {
-    const num = Math.floor(Math.random() * 255);
+    const num = () => Math.floor(Math.random() * 255);
     const randomRgba = (
-      `rgba(${num}, ${num}, ${num}, 0.6)`
+      `rgba(${num()}, ${num()}, ${num()}, 0.6)`
     );
     randomColor.push(randomRgba);
     dataKey.push(key);
