@@ -10,14 +10,12 @@ const DocumentSize = (props) => {
     }
   })
   .map((x, i) => {
-    const num = () => Math.floor(Math.random() * 255);
     const randomRgba = (
-      `rgba(${num()}, ${num()}, ${num()}, 0.6)`
+      `rgba(${props.num(255)}, ${props.num(255)}, ${props.num(255)}, 0.6)`
     );
-    const radius = Math.floor(Math.random() * 5);
     randomColor.push(randomRgba);
 
-    return {x: i +1, y: x.document_size, r: radius };
+    return {x: i +1, y: x.document_size, r: props.num(5) };
   });
 
   const data = {

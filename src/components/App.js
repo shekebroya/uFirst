@@ -16,7 +16,8 @@ class App extends Component {
       json: [],
       request: false,
       response: false,
-      document: false
+      document: false,
+      num: (range) => Math.floor(Math.random() * range)
     }
   }
   async getData() {
@@ -27,7 +28,6 @@ class App extends Component {
     const epa = await res.data.match(regex);
 
     const jsonFormated = await epa.map((data) => {
-      const formatedString = data.replace(/"/,"'").replace(/"/,"'").replace("' ","' +");
       const objToJson = {
         "host": undefined,
         "datetime":{"day": undefined, "hour": undefined, "minute": undefined, "second": undefined},
@@ -38,6 +38,8 @@ class App extends Component {
         "response_code": undefined, "document_size": undefined
       };
 
+      const formatedString = data.replace(/"/,"'").replace(/"/,"'").replace("' ","' +");
+
       const host = formatedString.match(/^.*(?=\.)\.\w{2,}\.\w{1,}/gm);
       if(!!host) {
         objToJson.host = host[0];
@@ -47,6 +49,7 @@ class App extends Component {
       if(!!datetime) {
         datetime.map((dt) => {
           const arrayDt = dt.slice(1, dt.length - 1).split(':');
+          // console.log('arrayDt: ', arrayDt);
           objToJson.datetime.day = arrayDt[0];
           objToJson.datetime.hour = arrayDt[1];
           objToJson.datetime.minute = arrayDt[2];
@@ -122,12 +125,14 @@ class App extends Component {
 
         <Methods
           json={this.state.json}
+          num={this.state.num}
           request={this.state.request}
           handleShowRequest={this.handleShowRequest}
         />
         {this.state.request &&
           <Requests
             json={this.state.json}
+            num={this.state.num}
             response={this.state.response}
             handleShowResponse={this.handleShowResponse}
           />
@@ -135,6 +140,7 @@ class App extends Component {
         {this.state.response &&
           <ResponseCodes
             json={this.state.json}
+            num={this.state.num}
             document={this.state.document}
             handleShowDocument={this.handleShowDocument}
           />
@@ -142,6 +148,7 @@ class App extends Component {
         {this.state.document &&
           <DocumentSize
             json={this.state.json}
+            num={this.state.num}
           />
         }
 
