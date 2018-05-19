@@ -29,7 +29,7 @@ class App extends Component {
 
     const jsonFormated = await epa.map((data) => {
       const objToJson = {
-        "host": undefined,
+        "host": 'foo',
         "datetime":{"day": undefined, "hour": undefined, "minute": undefined, "second": undefined},
         "request":{
           "method": undefined, "url": undefined,
@@ -37,8 +37,7 @@ class App extends Component {
         },
         "response_code": undefined, "document_size": undefined
       };
-
-      const formatedString = data.replace(/"/,"'").replace(/"/,"'").replace("' ","' +");
+      let formatedString = data.replace('="', '').replace(/"/,"'").replace(/"/,"'").replace("' ","' +");
 
       const host = formatedString.match(/^.*(?=\.)\.\w{2,}\.\w{1,}/gm);
       if(!!host) {
@@ -48,6 +47,7 @@ class App extends Component {
       let datetime = formatedString.match(/\[(.*?)\]/gm);
       if(!!datetime) {
         datetime.map((dt) => {
+          const test = {day: '', hour: '', minute: '', second: '' };
           const arrayDt = dt.slice(1, dt.length - 1).split(':');
           // console.log('arrayDt: ', arrayDt);
           objToJson.datetime.day = arrayDt[0];
@@ -57,8 +57,20 @@ class App extends Component {
         });
       }
 
-      const request = formatedString.match(/\'(.*?)\'/gm);
-      if(!!request) {
+      const methodNone = formatedString.match(/ \'[a-z]{1}/gm);
+      const noneMethodString = data.replace('="', '').replace(/"/,"' ").replace(/"/,"' ").replace("' ","' ");
+
+      if(!!methodNone) {
+
+        let method = noneMethodString.match(/ \'\w{3,}/gm);
+        if(!!method) {
+          objToJson.request.method = method.map((x) => x.trim().replace("'", ""))[0];
+        }
+        let url = noneMethodString.match(/ \/(.*?)\ /gm);
+        if(!!url) {
+          objToJson.request.url = url.map((x) => x.trim())[0];
+        }
+      } else {
         let method = formatedString.match(/ \'\w{3,}/gm);
         if(!!method) {
           objToJson.request.method = method.map((x) => x.trim().replace("'", ""))[0];
@@ -67,17 +79,18 @@ class App extends Component {
         if(!!url) {
           objToJson.request.url = url.map((x) => x.trim())[0];
         }
-        let protocol = formatedString.match(/\ \w{2,}\//gm);
-        if(!!protocol) {
-          objToJson.request.protocol = protocol.map((x) => x.replace("/", "").trim())[0];
-        }
-        let protocolVersion = formatedString.match(/\ \w{2,}\/(.*?)\'/gm);
-        if(!!protocolVersion) {
-          objToJson.request.protocol_version = protocolVersion.map((x) => {
-            return x.replace(/\ \w{2,}\//gm, "").replace("'", "");
-          })[0];
-        }
       }
+      let protocol = formatedString.match(/\ \w{2,}\//gm);
+      if(!!protocol) {
+        objToJson.request.protocol = protocol.map((x) => x.replace("/", "").trim())[0];
+      }
+      let protocolVersion = formatedString.match(/\ \w{2,}\/(.*?)\'/gm);
+      if(!!protocolVersion) {
+        objToJson.request.protocol_version = protocolVersion.map((x) => {
+          return x.replace(/\ \w{2,}\//gm, "").replace("'", "");
+        })[0];
+      }
+
 
       let responseCode = formatedString.match(/ \+\d{3}/gm);
       if(!!responseCode) {
@@ -91,12 +104,7 @@ class App extends Component {
 
       return objToJson;
     });
-
-    return await jsonFormated.filter((x) => {
-        if(x.host !== undefined && x.request.method !== undefined && x.request.url !== undefined && x.response_code !== undefined && x.document_size !== undefined) {
-          return x;
-        }
-    });
+    return await jsonFormated;
   }
   componentDidMount() {
     if (!!this.state.json) {

@@ -4,7 +4,7 @@ import { Pie } from 'react-chartjs-2';
 const ResponseCodes = (props) => {
 
   const dataKey = [];
-  const randomColor = [];
+  const randomRgba = [];
   const responseCodes = props.json.map((rc) => {
     return rc.response_code;
   }).reduce( (match, num) => {
@@ -13,10 +13,9 @@ const ResponseCodes = (props) => {
   },{});
 
   const dataValue = Object.entries(responseCodes).map(([key, value]) => {
-    const randomRgba = (
+    randomRgba.push(
       `rgba(${props.num(255)}, ${props.num(255)}, ${props.num(255)}, 0.6)`
     );
-    randomColor.push(randomRgba);
     dataKey.push(key);
     return value;
   });
@@ -25,7 +24,7 @@ const ResponseCodes = (props) => {
     labels: dataKey,
   	datasets: [{
   		data: dataValue,
-  		backgroundColor: randomColor,
+  		backgroundColor: randomRgba,
   		hoverBackgroundColor: '#e6007e'
   	}]
   }

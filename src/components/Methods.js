@@ -4,7 +4,7 @@ import { Doughnut } from 'react-chartjs-2';
 const Methods = (props) => {
 
   const dataLabel = [];
-  const randomColor = [];
+  const randomRgba = [];
   const responseCodes = props.json.map((rc) => {
     return rc.request.method;
   }).reduce( (match, num) => {
@@ -13,11 +13,9 @@ const Methods = (props) => {
   },{});
 
   const dataValue = Object.entries(responseCodes).map(([label, value]) => {
-
-    const randomRgba = (
+    randomRgba.push(
       `rgba(${props.num(255)}, ${props.num(255)}, ${props.num(255)}, 0.6)`
     );
-    randomColor.push(randomRgba);
     dataLabel.push(label);
     return value;
   });
@@ -26,7 +24,7 @@ const Methods = (props) => {
     labels: dataLabel,
   	datasets: [{
   		data: dataValue,
-  		backgroundColor: randomColor,
+  		backgroundColor: randomRgba,
   		hoverBackgroundColor: '#e6007e'
   	}]
   }

@@ -10,12 +10,11 @@ const Requests = (props) => {
   return match;
   },{});
 
-  const randomColor = [];
+  const randomRgba = [];
   const dataValue = Object.entries(datetime).map(([key, value], i) => {
-    const randomRgba = (
+    randomRgba.push(
       `rgba(${props.num(255)}, ${props.num(255)}, ${props.num(255)}, 0.6)`
     );
-    randomColor.push(randomRgba);
     return { 'x': i, 'y': value, 'r': props.num(4) + 2 }
   });
 
@@ -24,7 +23,7 @@ const Requests = (props) => {
         label: 'Requests pro Minute',
         fill: false,
         lineTension: 0.1,
-        backgroundColor: randomColor,
+        backgroundColor: randomRgba,
         borderColor: 'rgba(75,192,192,1)',
         borderCapStyle: 'butt',
         borderDash: [],

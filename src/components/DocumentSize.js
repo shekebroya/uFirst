@@ -3,18 +3,16 @@ import { Bubble } from 'react-chartjs-2';
 
 const DocumentSize = (props) => {
 
-  const randomColor = [];
+  const randomRgba = [];
   const dataValue = props.json.filter((ds) => {
     if(ds.response_code === '200' && Number(ds.document_size) < 1000) {
       return ds;
     }
   })
   .map((x, i) => {
-    const randomRgba = (
+    randomRgba.push(
       `rgba(${props.num(255)}, ${props.num(255)}, ${props.num(255)}, 0.6)`
     );
-    randomColor.push(randomRgba);
-
     return {x: i +1, y: x.document_size, r: props.num(5) };
   });
 
@@ -24,7 +22,7 @@ const DocumentSize = (props) => {
       duration: 0,
       fill: false,
       lineTension: 0.1,
-      backgroundColor: randomColor,
+      backgroundColor: randomRgba,
       borderColor: 'rgba(75,192,192,1)',
       borderCapStyle: 'butt',
       borderDash: [],
